@@ -1,69 +1,19 @@
 
-
-
 const { google } = require('googleapis');
+const {spreadsheet} = require('./spreadsheet')
+const _ = require('underscore')
 
 
+const DATA_AUTOS = "1Tpui79bHcuKUYPu_n7hdNQSUdphCjtmHTKW1_BCHelw"
 
-
-
-
-const getDATA_AUTO = async function () {
-    const auth = await google.auth.getClient({
-        keyFile: "client_secert.json",
-
-        scopes: "https://www.googleapis.com/auth/spreadsheets"
-    })
-
-// instance of google Sheets API
-const googleSheet = google.sheets({ version: "v4", auth });
-    // Sheet DATA_AUTOS
-    const spreadsheetId = "1Tpui79bHcuKUYPu_n7hdNQSUdphCjtmHTKW1_BCHelw"
-    //Get metada about spreadsheet
-
-    const getRegistroGeneral = await googleSheet.spreadsheets.values.get({
-        auth,
-        spreadsheetId,
-        range: "REGISTRO_GENEREAL"
-    })
-
-    const data = await getRegistroGeneral.data.values
-
-    console.log(data.shift())
-
-    return data
-
+const registroGeneral = async function () {
+   const registroGeneral = await spreadsheet(DATA_AUTOS, "REGISTRO_GENEREAL") 
+   const headers = registroGeneral.shift()
+   //console.log(headers)
+  const parseJson = _.map(registroGeneral, (e)=> _.object(headers, e))
+   return parseJson
 }
 
 
-const getFOTOS_PRESENTACION = async function () {
-    const auth = await google.auth.getClient({
-        keyFile: "client_secert.json",
 
-        scopes: "https://www.googleapis.com/auth/spreadsheets"
-    })
-
-// instance of google Sheets API
-const googleSheet = google.sheets({ version: "v4", auth });
-
-    // Sheet DATA_AUTOS
-    
-    const spreadsheetId = "1Tpui79bHcuKUYPu_n7hdNQSUdphCjtmHTKW1_BCHelw"
-    //Get metada about spreadsheet
-
-    const getRegistroGeneral = await googleSheet.spreadsheets.values.get({
-        auth,
-        spreadsheetId,
-        range: "FOTOS_PRESENTACION"
-    })
-
-    const data = getRegistroGeneral.data.values
-
-    //console.log(data.shift())
-
-    return data
-
-}
-
-
-module.exports = { getDATA_AUTO, getFOTOS_PRESENTACION }
+module.exports = { registroGeneral }

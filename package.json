@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -12,6 +13,7 @@
     "excel4node": "^1.7.2",
     "express": "^4.17.3",
     "googleapis": "^100.0.0",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "underscore": "^1.13.2"
   }
 }
