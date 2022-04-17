@@ -1,8 +1,9 @@
 const { google } = require('googleapis');
+const _ = require('underscore')
 
-const spreadsheet = async function (wb, ws) {
+const spreadsheet = async function (wb, ws, json) {
     const auth = await google.auth.getClient({
-        keyFile: "client_secert.json",
+        keyFile: "client_secret.json",
         scopes: "https://www.googleapis.com/auth/spreadsheets"
     })
 
@@ -16,7 +17,20 @@ const spreadsheet = async function (wb, ws) {
     })
 
     data = wsheet.data.values
-    return data
+
+    if(json) {
+        const headers = data.shift()
+        const newData = _.map(data, (e)=> _.object(headers, e))
+        return newData
+    
+    } else {
+        console.log(data)
+        
+        return data
+    }
+    
+
+    
 
 }
 

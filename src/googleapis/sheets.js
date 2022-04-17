@@ -7,12 +7,18 @@ const _ = require('underscore')
 const DATA_AUTOS = "1Tpui79bHcuKUYPu_n7hdNQSUdphCjtmHTKW1_BCHelw"
 
 const registroGeneral = async function () {
-   const registroGeneral = await spreadsheet(DATA_AUTOS, "REGISTRO_GENEREAL") 
-   const headers = registroGeneral.shift()
-   //console.log(headers)
-  const parseJson = _.map(registroGeneral, (e)=> _.object(headers, e))
-   return parseJson
+   const registroGeneral = await spreadsheet(DATA_AUTOS, "REGISTRO_GENEREAL", true) 
+   
+   return registroGeneral
 }
+
+const fotosProsentacion = async function () {
+   const registroGeneral = await spreadsheet(DATA_AUTOS, "FOTOS_PRESENTACION", true) 
+   
+   return registroGeneral
+}
+
+
 
 
 

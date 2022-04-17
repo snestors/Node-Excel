@@ -5,8 +5,8 @@ const { registroGeneral } = require('../googleapis/sheets')
 
 router.get('/', async (req, res) => {
     const data = await registroGeneral()
-    const dataFilter = data.filter((e)=> e["MARCA"]==="NISSAN")
-    res.send(dataFilter)
+    //const dataFilter = data.filter((e)=> e["MARCA"]==="NISSAN")
+    res.send(data)
 });
 
 module.exports = router;
