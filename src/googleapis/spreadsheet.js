@@ -24,7 +24,7 @@ const spreadsheet = async function (wb, ws, json) {
         return newData
     
     } else {
-        console.log(data)
+        //console.log(data)
         
         return data
     }
